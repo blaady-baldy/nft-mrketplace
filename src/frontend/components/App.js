@@ -1,48 +1,59 @@
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Home from "./Home";
+import Create from "./Create";
+// import Customer from "./pages/customer/landing";
+import ConnectWallet from "./connectWallet";
+// import Warehouse from "./pages/brand/warehouse";
+// import Error from "./pages/error";
+import { MoralisProvider } from "react-moralis";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import Loading from "./Loading";
 
-import logo from './logo.png';
-import './App.css';
- 
+//Shanky Imports
+import { NotificationProvider } from "web3uikit";
+
 function App() {
+  // const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 0);
+  // }, []);
+  //4500
   return (
-    <div>
-      <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a
-          className="navbar-brand col-sm-3 col-md-2 ms-3"
-          href="http://www.dappuniversity.com/bootcamp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Dapp University
-        </a>
-      </nav>
-      <div className="container-fluid mt-5">
-        <div className="row">
-          <main role="main" className="col-lg-12 d-flex text-center">
-            <div className="content mx-auto mt-5">
-              <a
-                href="http://www.dappuniversity.com/bootcamp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={logo} className="App-logo" alt="logo"/>
-              </a>
-              <h1 className= "mt-5">Dapp University Starter Kit</h1>
-              <p>
-                Edit <code>src/frontend/components/App.js</code> and save to reload.
-              </p>
-              <a
-                className="App-link"
-                href="http://www.dappuniversity.com/bootcamp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LEARN BLOCKCHAIN <u><b>NOW! </b></u>
-              </a>
-            </div>
-          </main>
+    <MoralisProvider initializeOnMount={false}>
+      <NotificationProvider>
+        <div className="App">
+          <Router>
+            <nav style={{ fontFamily: "cursive" }}>
+              <Link className="navheaders" to="/">
+                Home
+              </Link>
+              <Link className="navheaders" to="/create">
+                Create NFT
+              </Link>
+              {/* <Link className="navheaders" to="/customer">
+                  Customer
+                </Link> */}
+              <ConnectWallet />
+            </nav>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<Create />} />
+              {/* <Route path="/create/warehouse" element={<Warehouse />} /> */}
+              {/* <Route path="/customer" element={<Customer />} /> */}
+              {/* <Route path="*" element={<Error />} /> */}
+            </Routes>
+            {
+              //<div className="Footer">Footer</div>
+            }
+          </Router>
         </div>
-      </div>
-    </div>
+      </NotificationProvider>
+    </MoralisProvider>
   );
 }
 
