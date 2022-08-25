@@ -74,7 +74,7 @@ contract NFT is ERC721URIStorage, Ownable {
 
     // RETURNS THE TOTAL TOKENS THAT HAVE BEEN MINTED
 
-    function getTotalySupply() public view returns (uint256) {
+    function getTokenCount() public view returns (uint256) {
         return tokenCount;
     }
 
